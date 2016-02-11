@@ -1,0 +1,7 @@
+package QuoterAlphaClient;
+
+import javax.swing.JButton;
+
+public class RemoveQuoteButton extends JButton {
+
+}

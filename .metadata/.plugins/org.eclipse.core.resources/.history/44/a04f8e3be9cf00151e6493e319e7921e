@@ -1,0 +1,50 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+class Test {
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + number;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Test other = (Test) obj;
+		if (number != other.number)
+			return false;
+		return true;
+	}
+
+	public int number;
+}
+
+public class App {
+	public static void main(String[] args) {
+		App app = new App();
+		Test test = new Test();
+		test.number =10;
+		Test test1 = new Test();
+		test1.number =10;
+		System.out.println(test.equals(((Test)test1).number));
+	}
+	
+	
+	
+
+}
+

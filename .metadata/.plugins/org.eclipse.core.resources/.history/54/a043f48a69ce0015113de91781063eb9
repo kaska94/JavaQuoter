@@ -1,0 +1,50 @@
+package QuoterAlphaClient;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EtchedBorder;
+
+import QuoterAlphaServer.Quote;
+
+public class WestQuotePanel extends JPanel {
+
+	private ClientApp app;
+	private ArrayList<JTextArea> listJTextAreas = new ArrayList<JTextArea>();
+
+	public WestQuotePanel(ClientApp app) {
+		this.app = app;
+		JPanel panel = this;
+		setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		Dimension size = getPreferredSize();
+		size.width = 200;
+		size.height = 500;
+		setPreferredSize(size);
+		
+		for (Quote quote : app.getListQuotes()) {
+			System.out.println(quote);
+			QuoteTextArea area = new QuoteTextArea(quote);
+			panel.add(area.getArea());
+			panel.validate();
+			panel.repaint();
+		}
+	
+
+		
+
+
+	}
+
+	public void addQuoteInPanel(Quote quote) {
+	}
+
+}

@@ -1,0 +1,52 @@
+package Client;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.ScrollPane;
+import java.awt.TextArea;
+
+
+
+
+
+
+
+import javax.swing.BorderFactory;
+import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+
+public class TextAreaField extends JTextArea{
+
+	private static final long serialVersionUID = 1L;
+	public JTextArea area 					   = null;
+	
+	public TextAreaField(String quote)
+	{
+		
+		
+		area = new JTextArea(5,15);
+		area.setBackground(new Color(140,176,244));
+		area.setText(quote);
+		area.setEditable(false);
+		
+		
+		area.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 5 , 0));
+		
+		area.setLineWrap(true);
+		area.setWrapStyleWord(true);
+		area.setAlignmentX(100);
+		
+	
+		area.setSize(200,300);
+		area.setVisible(true);
+	}
+	
+	public JTextArea getArea() {
+		return area;
+	}
+	public void setArea(JTextArea area) {
+		this.area = area;
+	}
+	
+}

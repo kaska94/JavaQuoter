@@ -1,0 +1,23 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+class App extends JPanel {
+
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		JPanel test = new JPanel();
+		test.setPreferredSize(new Dimension(2000, 2000));
+		JScrollPane scrollFrame = new JScrollPane(test);
+		test.setAutoscrolls(true);
+		scrollFrame.setPreferredSize(new Dimension(800, 300));
+		frame.add(scrollFrame);
+		frame.setVisible(true);
+	}
+
+}

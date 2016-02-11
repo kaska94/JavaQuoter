@@ -1,0 +1,65 @@
+package QuoterAlphaClient;
+
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+import QuoterAlphaServer.Quote;
+
+public class WestQuotePanel extends JPanel {
+
+	private ClientApp app;
+	private WestQuotePanel panel;
+	private static ArrayList<QuoteTextArea> list = new ArrayList<QuoteTextArea>();
+
+	public WestQuotePanel(ClientApp app) {
+		this.app = app;
+		panel = this;
+		setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		Dimension size = getPreferredSize();
+		size.width = 200;
+		size.height = 600;
+		setPreferredSize(size);
+
+		for (Quote quote : app.getListQuotes()) {
+			addQuoteInPanel(quote);
+		}
+	}
+
+	public void addQuoteInPanel(Quote quote) {
+		QuoteTextArea area = new QuoteTextArea(quote, panel);
+		list.add(area);
+		panel.add(area.getArea());
+		panel.validate();
+		panel.repaint();
+	}
+
+	public void removeQuoteInPanel(QuoteTextArea quoteTextArea) {
+		list.remove(quoteTextArea);
+		panel.remove(quoteTextArea);
+		panel.validate();
+		panel.repaint();
+		
+	}
+
+	public ClientApp getApp() {
+		return app;
+	}
+
+	public void setApp(ClientApp app) {
+		this.app = app;
+	}
+
+	public static ArrayList<QuoteTextArea> getList() {
+		return list;
+	}
+
+	public static void setList(ArrayList<QuoteTextArea> list) {
+		WestQuotePanel.list = list;
+	}
+
+}

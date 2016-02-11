@@ -1,0 +1,81 @@
+package QuoterAlphaServer;
+
+import java.io.Serializable;
+
+public class Quote implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	public String author;
+	public String quote;
+	public boolean isForRemoving;
+
+	public Quote(String author, String quote) {
+		this.author = author;
+		this.quote = quote;
+		this.isForRemoving = false;
+	}
+
+	public Quote() {
+	}
+
+	@Override
+	public String toString() {
+		return "Quote [author=" + author + ", quote=" + quote + "]";
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getQuote() {
+		return quote;
+	}
+
+	public void setQuote(String quote) {
+		this.quote = quote;
+	}
+
+	public boolean isForRemoving() {
+		return isForRemoving;
+	}
+
+	public void setForRemoving(boolean isForRemoving) {
+		this.isForRemoving = isForRemoving;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((quote == null) ? 0 : quote.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quote other = (Quote) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
+		if (quote == null) {
+			if (other.quote != null)
+				return false;
+		} else if (!quote.equals(other.quote))
+			return false;
+		return true;
+	}
+
+}

@@ -1,0 +1,29 @@
+package test;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+ class MainFrame extends JFrame {
+
+	private QuotePanel panel;
+
+	public MainFrame(String title) {
+		super(title);
+
+		setLayout(new BorderLayout());
+
+		JTextArea textArea = new JTextArea();
+		JButton button = new JButton("Clicke me !");
+		panel = new QuotePanel();
+		
+		Container c = getContentPane();
+
+		c.add(textArea, BorderLayout.CENTER);
+		c.add(button, BorderLayout.SOUTH);
+		c.add(panel, BorderLayout.WEST);
+	}
+}

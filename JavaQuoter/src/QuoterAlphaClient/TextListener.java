@@ -1,0 +1,40 @@
+package QuoterAlphaClient;
+
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+public class TextListener implements DocumentListener {
+
+	private EastQuotePanel panel;
+
+	public TextListener(EastQuotePanel panel) {
+		this.panel = panel;
+	}
+
+	public void changedUpdate(DocumentEvent e) {
+		changed(e);
+	}
+
+	public void removeUpdate(DocumentEvent e) {
+		changed(e);
+	}
+
+	public void insertUpdate(DocumentEvent e) {
+		changed(e);
+	}
+
+	public void changed(DocumentEvent documentEvent) {
+		if (panel.getTextFieldAuthor().getText().equals("")
+				|| panel.getTextAreaQuote().getText().equals("")) {
+			panel.getAddButton().setEnabled(false);
+		}
+		if (panel.getTextFieldAuthor().getText().matches("\\d+")
+				|| panel.getTextAreaQuote().getText().matches("\\d+")) {
+			panel.getAddButton().setEnabled(false);
+		} else {
+			panel.getAddButton().setEnabled(true);
+		}
+
+	}
+
+}

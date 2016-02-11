@@ -1,0 +1,118 @@
+package Client;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+
+public class Client {
+	private JFrame 							mainWindow   	= null;
+	private JPanel 							eastPanel		= null;
+	private JPanel 						  	centralPannel 	= null;
+	private JPanel 						  	buttomPanel 	= null;
+	private Client							client			= null;
+	private ConnectionHandler 				connection		= null;
+	private ArrayList<TextAreaField>		areaList		= null;
+	private String[]						quotes			= null;
+	
+	public static void main (String[] args)
+	{	
+		Client client = new Client();
+	}
+	public Client()
+	{
+		client = this;
+		areaList = new ArrayList<TextAreaField>();
+		
+		connection = new ConnectionHandler (client, 8080);
+		connection.getCurrentData();
+		quotes = connection.getQuotes();
+	
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+            	createFrame();
+            }
+        });
+	}
+	
+	public void createFrame(){
+		
+		mainWindow = new JFrame("Quoter");
+		mainWindow.setSize(600,800);
+		mainWindow.setLayout(new FlowLayout());
+		mainWindow.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windwoEvent){
+			System.exit(0);
+			}
+		});
+		mainWindow.getContentPane().setBackground(new Color(100,150,200));
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		mainWindow.setLocation(dim.width/2 - mainWindow.getSize().width/2, dim.height/2 - mainWindow.getSize().height/2);
+		
+		JButton addButton = new JButton("Add");
+		addButton.setSize(50,50);
+		addButton.setActionCommand("Add");
+		
+		addButton.addActionListener(new ActionListener() {
+					
+				public void actionPerformed(ActionEvent e) {
+					String s = "Add";
+					if(s.equals((e.getActionCommand())))
+					{
+						System.out.println("Done");
+					}
+				}
+			});
+		
+		
+		
+		
+		centralPannel = new JPanel();
+		centralPannel.setBackground(new Color(100,150,200));
+		centralPannel.setLayout(new GridLayout(3,1,3,3));
+	
+		JScrollPane  scrollPane = new JScrollPane(centralPannel,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, 
+														ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    scrollPane.setPreferredSize(new Dimension(600, 600));
+		int i = 0 ;
+		for(String s: quotes)
+		{
+			if(s!=null)
+			{
+				System.out.println(i + " = " +s);
+				TextAreaField textField = new TextAreaField(s);
+				areaList.add(textField);
+				centralPannel.add(textField.getArea());
+				i++;
+			}
+		}
+		
+		
+		
+		
+		eastPanel = new JPanel();
+		eastPanel.setLayout(new GridLayout(10,1));
+		eastPanel.add(addButton);
+		eastPanel.setBackground(new Color(100,150,200));
+		
+		mainWindow.add(eastPanel, BorderLayout.EAST);
+		mainWindow.add(centralPannel, BorderLayout.NORTH);
+		
+		mainWindow.pack();
+		mainWindow.setVisible(true);
+	}
+
+	
+}

@@ -1,0 +1,27 @@
+package QuoterAlphaClient;
+
+import javax.swing.JButton;
+
+public class RemoveQuoteButton extends JButton {
+	private EastQuotePanel panel;
+
+	public RemoveQuoteButton(String name, EastQuotePanel panel) {
+		super(name);
+		this.panel = panel;
+	}
+
+	public void removeQuote() {
+		for (QuoteTextArea textArea : WestQuotePanel.getList()) {
+			if (textArea.isSelected()) {
+				panel.getApp().getListQuotes().remove(textArea.getQuote())
+				panel.getApp().getConnection().removeQuote(textArea.getQuote());
+				
+				
+				
+				panel.getApp().getListQuotes().add(newQuote);
+				panel.getApp().getConnection().addQuote(newQuote);
+				ClientApp.getFrame().getWestPanel().addQuoteInPanel(newQuote);
+			}
+		}
+	}
+}

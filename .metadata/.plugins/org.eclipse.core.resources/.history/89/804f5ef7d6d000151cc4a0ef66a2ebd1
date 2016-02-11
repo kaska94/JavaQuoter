@@ -1,0 +1,80 @@
+package Client;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class ConnectionHandler {
+
+	public Socket socket = null;
+	public int port = 0;
+	public BufferedReader input = null;
+	public PrintStream output = null;
+	public Client clientApp = null;
+	public String[] quotes = null;
+
+	public ConnectionHandler(Client clientApp, int port) {
+		this.clientApp = clientApp;
+		try {
+
+			this.port = port;
+
+			socket = new Socket("localhost", port);
+
+			input = new BufferedReader(new InputStreamReader(
+					socket.getInputStream()));
+
+			output = new PrintStream(socket.getOutputStream());
+
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	
+	public void getCurrentData() {
+		String userInput;
+		String fromStrBuff[];
+		StringBuffer strBuffer = new StringBuffer();
+		int i = 0;
+		quotes = new String[64];
+		output.println("0");
+		output.flush();
+		try {
+			while (!(userInput = input.readLine()).isEmpty()) {
+				if (userInput != null) {
+					strBuffer.append(userInput);
+				}
+			}
+			fromStrBuff = strBuffer.toString().split("[|]");
+			for (String s : fromStrBuff) {
+				System.out.println("client string" + s);
+				if (s != null) {
+					if (!s.equals("\n")) {
+						if (!s.isEmpty() || s.equals("")) {
+							quotes[i] = s;
+							i++;
+						}
+					}
+				}
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public String[] getQuotes() {
+		return quotes;
+	}
+}

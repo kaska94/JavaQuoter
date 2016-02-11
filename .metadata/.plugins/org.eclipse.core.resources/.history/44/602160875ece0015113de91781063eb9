@@ -1,0 +1,49 @@
+package QuoterAlphaClient;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import QuoterAlphaClient.EastQuotePanel;
+
+public class MainFreme extends JFrame {
+
+	private EastQuotePanel eastPanel;
+	private WestQuotePanel westPanel;
+	private ClientApp app;
+	private MainFreme frame;
+	
+	public MainFreme(String title, ClientApp app) {
+		super(title);
+		this.app = app;
+		this.frame = this;
+		
+		setLayout(new BorderLayout());
+		
+		JButton button = new JButton("Clicke me !");
+		eastPanel = new EastQuotePanel(app);
+		westPanel = new WestQuotePanel(app);
+		Container c = getContentPane();
+		
+		
+		c.add(westPanel, BorderLayout.CENTER);
+		c.add(button, BorderLayout.SOUTH);
+		c.add(eastPanel, BorderLayout.WEST);
+	}
+	
+
+	public MainFreme getFrame() {
+		return frame;
+	}
+
+
+	public void setFrame(MainFreme frame) {
+		this.frame = frame;
+	}
+
+}

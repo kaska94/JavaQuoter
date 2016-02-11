@@ -1,0 +1,77 @@
+package QuoterAlphaClient;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EtchedBorder;
+
+import QuoterAlphaServer.Quote;
+
+public class WestQuotePanel extends JPanel {
+
+	private ClientApp app;
+	private ArrayList<JTextArea> listJTextAreas = new ArrayList<JTextArea>();
+
+	public WestQuotePanel(ClientApp app) {
+		this.app = app;
+		JPanel panel = this;
+
+		/*
+		 * for (Quote quote : app.getListQuotes()) { System.out.println(quote);
+		 * }
+		 */
+
+		setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		JTextArea area1 = new JTextArea(10, 10);
+		area1.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		area1.setLineWrap(true);
+		area1.setWrapStyleWord(true);
+		area1.setText("AREA 1 !");
+		area1.setSize(100, 100);
+		area1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		JTextArea area2 = new JTextArea(10, 10);
+		area2.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		area2.setLineWrap(true);
+		area2.setWrapStyleWord(true);
+		area2.setText("AREA 1 !");
+		area2.setSize(100, 100);
+		area2.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		JTextArea area3 = new JTextArea(10, 10);
+		area3.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		area3.setLineWrap(true);
+		area3.setWrapStyleWord(true);
+		area3.setText("AREA 1 !");
+		area3.setSize(100, 100);
+		area3.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		JTextArea area4 = new JTextArea(10, 10);
+		area4.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		area4.setLineWrap(true);
+		area4.setWrapStyleWord(true);
+		area4.setText("AREA 1 !");
+		area4.setSize(100, 100);
+		area4.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
+		panel.add(area3);
+		panel.add(area2);
+		panel.add(area1);
+		panel.add(area4);
+
+	}
+
+	public void addQuoteInPanel(Quote quote) {
+	}
+
+}

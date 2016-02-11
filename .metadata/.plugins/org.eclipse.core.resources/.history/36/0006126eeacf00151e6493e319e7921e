@@ -1,0 +1,70 @@
+package test;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+
+public class App {
+	private JFrame frame;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					App window = new App();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	public App() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		
+		JButton btnNewButton_4 = new JButton("New button");
+		panel.add(btnNewButton_4);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		panel.add(btnNewButton_3);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		panel.add(btnNewButton_2);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		panel.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		panel.add(btnNewButton);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel.add(scrollPane_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel.add(scrollPane);
+	}
+
+	 
+	
+	
+
+}
+

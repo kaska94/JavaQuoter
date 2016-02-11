@@ -1,0 +1,28 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+class Test {
+	public int number;
+}
+
+public class App {
+	public static void main(String[] args) {
+		App app = new App();
+		Test test = new Test();
+		test.number =10;
+		Test test1 = new Test();
+		test1.number =10;
+		System.out.println(test.equals(((Test)test1).number));
+	}
+	
+	
+	
+
+}
+

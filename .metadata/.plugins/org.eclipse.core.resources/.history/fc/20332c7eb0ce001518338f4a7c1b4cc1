@@ -1,0 +1,85 @@
+package QuoterAlphaClient;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JTextArea;
+import javax.swing.border.EtchedBorder;
+
+import QuoterAlphaServer.Quote;
+
+public class QuoteTextArea extends JTextArea {
+	private JTextArea area;
+	private WestQuotePanel panel;
+	private Quote quote;
+
+	public QuoteTextArea(Quote quote, WestQuotePanel panel) {
+		this.quote = quote;
+		this.panel = panel;
+		JTextArea area = new JTextArea(10, 10);
+		area.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		area.setLineWrap(true);
+		area.setWrapStyleWord(true);
+		area.setSize(50, 200);
+		area.setAlignmentX(Component.CENTER_ALIGNMENT);
+		area.setText(quote.getQuote() + "\n\n" + quote.getAuthor());
+		area.setEditable(false);
+		area.setBackground(new Color(233, 233, 226));
+		area.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ClientApp.getFrame().getEastPanel().getTextFieldAuthor()
+						.setText((((QuoteTextArea)area).getQuote().getAuthor()));
+
+				ClientApp.getFrame().getEastPanel().getTextAreaQuote()
+						.setText((((QuoteTextArea)area).getQuote().getQuote()));
+
+			}
+		});
+
+	}
+
+	public Quote getQuote() {
+		return quote;
+	}
+
+	public void setQuote(Quote quote) {
+		this.quote = quote;
+	}
+
+	public JTextArea getArea() {
+		return area;
+	}
+
+	public void setArea(JTextArea area) {
+		this.area = (QuoteTextArea) area;
+	}
+}

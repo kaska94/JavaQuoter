@@ -1,0 +1,115 @@
+package Server;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.Socket;
+import java.sql.SQLException;
+
+import javax.swing.JTextArea;
+
+import Server.Server.ServerThread;
+
+public class ClientWorker implements Runnable {
+
+	private Socket client = null;
+	private JTextArea textArea = null;
+	private ServerThread server = null;
+	private int columnCount = 0;
+	private BufferedReader in = null;
+	private PrintStream out = null;
+
+	// Constructor
+	ClientWorker(Socket client, ServerThread server) {
+		this.client = client;
+		this.server = server;
+	}
+
+	public void run() {
+
+		String line;
+
+		try {
+			in = new BufferedReader(new InputStreamReader(
+					client.getInputStream()));
+
+			out = new PrintStream(client.getOutputStream());
+
+			out.flush();
+		} catch (IOException e) {
+			System.out.println("in or out failed");
+			System.exit(-1);
+		}
+
+		while (true) {
+			try {
+
+				line = in.readLine();
+				System.out.println("recieved " + line);
+
+				if (line.charAt(0) == '0') {
+					checkDB("select * from quotes");
+				}
+
+				if (line.charAt(0) == '1') {
+
+				}
+
+			} catch (IOException e) {
+				System.out.println("Read failed");
+				System.exit(-1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void checkDB(String statement) throws SQLException {
+		server.askDbForStatement(statement);
+
+		try {
+
+			File file = new File("/filename.txt");
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			while (server.getMyRs().next()) {
+				String str = new String();
+				str = server.getMyRs().getString(2);
+				System.out.println(str);
+				out.println(str);
+				out.println("|");
+				out.flush();
+				bw.write(str);
+			}
+			out.println();
+			if (bw != null)
+				bw.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void iniColumns() {
+
+	}
+
+}

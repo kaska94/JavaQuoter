@@ -1,0 +1,74 @@
+package QuoterAlphaClient;
+
+import java.awt.EventQueue;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+import QuoterAlphaClient.MainFreme;
+import QuoterAlphaClient.ConnectionHandler;
+import QuoterAlphaServer.Quote;
+
+public class ClientApp {
+	private ClientApp client = null;
+	private ConnectionHandler connection = null;
+	private List<Quote> listQuotes;
+	private MainFreme frame;
+	
+	
+
+	public ClientApp() {
+		client = this;
+		connection = new ConnectionHandler(client, 8080);
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new MainFreme("Test", client);
+					frame.setSize(500, 400);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public MainFreme getFrame() {
+		return frame;
+	}
+
+	public void setFrame(MainFreme frame) {
+		this.frame = frame;
+	}
+
+	public ClientApp getClient() {
+		return client;
+	}
+
+	public void setClient(ClientApp client) {
+		this.client = client;
+	}
+
+	public ConnectionHandler getConnection() {
+		return connection;
+	}
+
+	public void setConnection(ConnectionHandler connection) {
+		this.connection = connection;
+	}
+
+	public List<Quote> getListQuotes() {
+		return listQuotes;
+	}
+
+	public void setListQuotes(List<Quote> listQuotes) {
+		this.listQuotes = listQuotes;
+	}
+
+	public static void main(String[] args) {
+
+		ClientApp client = new ClientApp();
+	}
+}

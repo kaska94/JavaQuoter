@@ -1,0 +1,84 @@
+package test;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+
+ class QuotePanel extends JPanel {
+	public QuotePanel() {
+		Dimension size = getPreferredSize();
+		size.width = 200;
+		setPreferredSize(size);
+
+		setBorder(BorderFactory.createTitledBorder("Quote"));
+
+		JButton addButton = new JButton("Add");
+		JButton removeButton = new JButton("Remove");
+
+		JLabel authorLabel = new JLabel("Author: ");
+		JLabel quote = new JLabel("Quote: ");
+
+		JTextField textFieldAuthor = new JTextField(12);
+		JTextArea textAreaQuote = new JTextArea(12, 12);
+		textAreaQuote.setBorder(BorderFactory
+				.createEtchedBorder(EtchedBorder.LOWERED));
+		setLayout(new GridBagLayout());
+
+		GridBagConstraints gc = new GridBagConstraints();
+
+		// First Column
+		gc.anchor = GridBagConstraints.LINE_END;
+		gc.weightx = 0.5;
+		gc.weighty = 0.5;
+
+		// AUTHOR LABEL
+		gc.gridx = 0;
+		gc.gridy = 0;
+		add(authorLabel, gc);
+
+		// QUOTE LABEL
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
+		gc.gridx = 0;
+		gc.gridy = 1;
+		add(quote, gc);
+
+		// Second Column
+
+		// AUTHOR
+		gc.anchor = GridBagConstraints.LINE_START;
+		gc.gridx = 1;
+		gc.gridy = 0;
+		add(textFieldAuthor, gc);
+
+		// TEXT AREA QUOTE
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		gc.gridx = 1;
+		gc.gridy = 1;
+		add(textAreaQuote, gc);
+
+		// Final row
+
+		// ADD BUTTON
+		gc.fill = GridBagConstraints.NONE;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		gc.gridx = 1;
+		gc.gridy = 2;
+		add(addButton, gc);
+
+		// REMOVE BUTTON
+		gc.anchor = GridBagConstraints.FIRST_LINE_END;
+		gc.gridx = 1;
+		gc.gridy = 2;
+		add(removeButton, gc);
+
+	}
+}
